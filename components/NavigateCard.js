@@ -3,17 +3,18 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_MAPS_APIKEY } from "react-native-dotenv";
 import { useDispatch } from "react-redux";
 import { setDestination } from "../slices/navSlice";
+import NavFavourites from "./NavFavourites";
 
 const NavigateCard = ({ navigation }) => {
   const dispatch = useDispatch();
 
   return (
     <SafeAreaView className="bg-white flex-1">
-      <Text className="text-center py-5 text-xl">NavigateCard</Text>
+      <Text className="text-center py-5 text-xl">Scegli la destinazione</Text>
       <View>
         <View className="px-4">
           <GooglePlacesAutocomplete
-            placeholder="Where to?"
+            placeholder="Dove vuoi andare?"
             nearbyPlacesAPI="GooglePlacesSearch"
             debounce={400}
             returnKeyType={"search"}
@@ -27,7 +28,7 @@ const NavigateCard = ({ navigation }) => {
                 })
               );
 
-              navigation.navigate("RideOptionsCard")
+              navigation.navigate("RideOptionsCard");
             }}
             query={{
               key: GOOGLE_MAPS_APIKEY,
@@ -43,12 +44,13 @@ const NavigateCard = ({ navigation }) => {
               },
               textInput: {
                 fontSize: 18,
-                backgroundColor: "#dddddf",
+                backgroundColor: "#e5e5e5",
                 height: 48,
               },
             }}
           />
         </View>
+        <NavFavourites />
       </View>
     </SafeAreaView>
   );
