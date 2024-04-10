@@ -16,6 +16,7 @@ const HomeScreen = ({ navigation }) => {
             width: 120,
             height: 120,
             resizeMode: "contain",
+            marginLeft:-18
           }}
           source={{
             uri: "https://img.freepik.com/premium-vector/classic-car-logo_1366-140.jpg",
@@ -23,9 +24,9 @@ const HomeScreen = ({ navigation }) => {
         />
 
         <GooglePlacesAutocomplete
+          placeholder="Where From?"
           nearbyPlacesAPI="GooglePlacesSearch"
           debounce={400}
-          placeholder="Where From?"
           onPress={(data, details = null) => {
             dispatch(
               setOrigin({ location: details.geometry.location, description: data.description })

@@ -25,25 +25,26 @@ const NavOptions = ({ navigation }) => {
 
   return (
     <FlatList
-      className="mt-4"
-      horizontal
+      className="mt-4 h-full"
       data={data}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity
           onPress={() => navigation.navigate(item.screen)}
-          className="p-2 pl-6 pb-6 pt-4 rounded-md bg-gray-200 mr-2 mt-4 w-40 border border-gray-300"
+          className="p-6 rounded-md bg-gray-200 my-2 border border-gray-300"
           disabled={!origin}
         >
-          <View className={`items-start ${!origin && "opacity-30"}`}>
+          <View className={`flex-row justify-around items-center ${!origin && "opacity-30"}`}>
             <Image
               className="rounded-full"
-              style={{ width: 100, height: 100, resizeMode: "contain" }}
+              style={{ width: 150, height: 150, resizeMode: "contain" }}
               source={{ uri: item.image }}
             />
-            <Text className="text-lg font-semibold mt-2 mb-4">{item.title}</Text>
-            <View className="bg-black rounded-full p-2">
-              <Icon type="antdesign" color="white" name="arrowright" />
+            <View>
+              <Text className="text-lg font-semibold mb-4">{item.title}</Text>
+              <View className="bg-black rounded-full p-2">
+                <Icon type="antdesign" color="white" name="arrowright" />
+              </View>
             </View>
           </View>
         </TouchableOpacity>
