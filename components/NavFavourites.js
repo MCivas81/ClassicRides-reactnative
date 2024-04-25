@@ -6,7 +6,7 @@ const data = [
     id: "123",
     icon: "home",
     location: "Casa",
-    destination: "Viale della Libertà, 146, Palermo, Italia",
+    destination: "Via della Libertà, 146, Palermo, Italia",
   },
   {
     id: "456",
@@ -19,14 +19,14 @@ const data = [
 const NavFavourites = () => {
   return (
     <FlatList
-      className="mt-4"
+      className="mt-4 p-5"
       data={data}
       keyExtractor={(item) => item.id}
       ItemSeparatorComponent={() => (
         <View className="bg-gray-100 h-0.5"/>
       )}
       renderItem={({ item }) => (
-        <TouchableOpacity className="flex-row items-center p-4">
+        <TouchableOpacity className="flex-row items-center py-4">
           <View className="bg-black rounded-full h-12 w-12 p-3 mr-4 flex items-center justify-center">
             <Icon type="ionicon" color="white" name={item.icon} size={20} />
           </View>

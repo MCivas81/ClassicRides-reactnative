@@ -25,19 +25,19 @@ const NavOptions = ({ navigation }) => {
 
   return (
     <FlatList
-      className="mt-4"
+      className="mt-4 px-5"
       data={data}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity
           onPress={() => navigation.navigate(item.screen)}
-          className="p-6 rounded-md bg-gray-200 my-2 border border-gray-300"
+          className="p-6 rounded-md bg-gray-200 mt-4 border border-gray-300"
           disabled={!origin}
         >
           <View className={`flex-row justify-between items-center space-x-4 ${!origin && "opacity-30"}`}>
             <Image
               className="rounded-full"
-              style={{ width: 150, height: 150, resizeMode: "contain" }}
+              style={{ width: 130, height: 130, resizeMode: "contain" }}
               source={{ uri: item.image }}
             />
             <View className="w-40">

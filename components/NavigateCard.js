@@ -1,12 +1,14 @@
-import { Text, SafeAreaView, View } from "react-native";
+import { Text, SafeAreaView, View, TouchableOpacity } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "react-native-dotenv";
 import { useDispatch } from "react-redux";
-import { setDestination } from "../slices/navSlice";
+import { selectDestination, setDestination } from "../slices/navSlice";
 import NavFavourites from "./NavFavourites";
+import { useSelector } from "react-redux";
 
 const NavigateCard = ({ navigation }) => {
   const dispatch = useDispatch();
+  const destination = useSelector(selectDestination);
 
   return (
     <SafeAreaView className="bg-white flex-1">
@@ -51,6 +53,21 @@ const NavigateCard = ({ navigation }) => {
           />
         </View>
         <NavFavourites />
+      </View>
+      <View className="flex-row justify-evenly mt-auto px-4">
+        <TouchableOpacity
+          disabled={!destination}
+          onPress={() => navigation.navigate("RideOptionsCard")}
+          className={`px-4 w-28 py-3 rounded-full bg-black ${!destination && "opacity-30"}`}
+        >
+          <Text className="text-white text-center">Corse</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          disabled={!destination}
+          className={`px-4 w-28 py-3 rounded-full bg-black ${!destination && "opacity-30"}`}
+        >
+          <Text className="text-white text-center">Noleggio</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

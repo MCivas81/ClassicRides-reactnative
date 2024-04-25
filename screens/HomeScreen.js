@@ -20,8 +20,8 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView className="bg-white h-full">
-      <View className="p-5">
-        <View className="flex-row items-center mb-6">
+      <View>
+        <View className="flex-row items-center mb-4 px-5">
           <Image
             style={{
               width: 120,
@@ -63,6 +63,7 @@ const HomeScreen = ({ navigation }) => {
             },
             container: {
               flex: 0,
+              marginHorizontal: 20,
             },
             textInput: {
               fontSize: 18,
