@@ -1,14 +1,16 @@
 import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
-import { selectDestination, selectOrigin } from "../slices/navSlice";
+import { selectDestination, selectOrigin, setTravelTimeInformation } from "../slices/navSlice";
 import MapViewDirections from "react-native-maps-directions";
 import { GOOGLE_MAPS_APIKEY } from "react-native-dotenv";
 import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 
 const Map = () => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
   const mapRef = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!origin || !destination) return;
@@ -17,6 +19,29 @@ const Map = () => {
       edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
     });
   }, [origin, destination]);
+
+  useEffect(() => {
+    if (!origin || !destination) return;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destination.description}&language=it-IT&&origins=${origin.description}&units=metric&key=${GOOGLE_MAPS_APIKEY}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [origin, destination, GOOGLE_MAPS_APIKEY]);
 
   return (
     <MapView
@@ -57,7 +82,7 @@ const Map = () => {
             latitude: destination.location.lat,
             longitude: destination.location.lng,
           }}
-          title="Origin"
+          title="Destination"
           description={destination.description}
           identifier="destination"
         />
